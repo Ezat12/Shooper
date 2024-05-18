@@ -1,0 +1,27 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 20px 50px;
+  box-shadow: 0 1px 3px -2px #000;
+  position: relative;
+}
+.navbar img:first-child {
+  width: 200px;
+}
+.navbar img:last-child {
+  width: 75px;
+}
+
+@media (max-width: 800px) {
+  .navbar {
+    padding: 15px 40px;
+  }
+  .navbar img:first-child {
+    width: 150px;
+  }
+  .navbar img:last-child {
+    width: 65px;
+  }
+}

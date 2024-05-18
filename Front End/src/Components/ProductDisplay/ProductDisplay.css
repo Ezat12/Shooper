@@ -1,0 +1,118 @@
+.show-info {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #444;
+  font-weight: 600;
+}
+.show-info img {
+  height: 15px;
+}
+.show-info-product {
+  display: flex;
+  gap: 50px;
+}
+.show-info-product .images {
+  display: flex;
+  gap: 10px;
+}
+.show-info-product .images .left-img {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.show-info-product .images .left-img img {
+  height: 100px;
+}
+.show-info-product .images .rigth-img img {
+  height: 100%;
+}
+.contant-show .title-name {
+  font-size: 30px;
+  font-weight: 600;
+}
+.contant-show .icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.contant-show .icons img {
+  width: 15px;
+}
+.contant-show .icons span {
+  font-size: 15px;
+  font-weight: 500;
+  color: #444;
+}
+.contant-show .prices {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.contant-show .prices .old-price,
+.contant-show .prices .new-price {
+  font-size: 17px;
+  font-weight: 700;
+}
+.contant-show .prices .old-price {
+  color: #717171;
+  text-decoration: line-through;
+}
+.contant-show .prices .new-price {
+  color: #ff4141;
+}
+.contant-show .light-weight {
+  font-weight: 400;
+}
+.contant-show .selects .size {
+  font-size: 18px;
+  font-weight: 600;
+  color: #737373;
+}
+.contant-show .selects .select-size {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.contant-show .selects .select-size span {
+  background-color: #dddddd;
+  border: 1px solid #ccc;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+}
+.contant-show button {
+  background-color: #ff4141;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+@media(max-width:992px) {
+  .show-info-product .images .left-img {
+    display: none;
+  }
+  .show-info-product .contant-show .title-name {
+    font-size: 20px
+  }
+}
+@media(max-width:770px) {
+  .show-info-product {
+    flex-direction: column;
+  }
+  .show-info-product .images .rigth-img {
+    width: 100%;
+  }
+  .show-info-product .images .rigth-img img {
+    width: 100%;
+  }
+}
