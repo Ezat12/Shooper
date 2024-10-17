@@ -26,6 +26,14 @@
   border: 1px solid #ccc;
   outline: none;
 }
+.login-signup .page-container .login-signup-fields input.invalid {
+  border: 1px solid #ff4141;
+}
+.login-signup .page-container .login-signup-fields .invalid-password {
+  color: #ff4141;
+  font-weight :500;
+  margin-top: -10px;
+}
 .login-signup .page-container button {
   width: 100%;
   margin: 15px 0;
