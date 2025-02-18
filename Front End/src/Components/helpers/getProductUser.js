@@ -1,5 +1,5 @@
 export default function getProductUser() {
-  fetch("http://localhost:5000/getuserproduct", {
+  fetch(`${process.env.REACT_APP_SERVER_URL}/getuserproduct`, {
     method: "GET",
     headers: {
       Accept: "application/form-data",

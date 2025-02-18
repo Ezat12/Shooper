@@ -72,13 +72,11 @@ const Product = mongoose.model("Product", schemaProduct);
 
 app.post("/addproduct", async (req, res) => {
   const find = await Product.find({});
-  console.log(find);
   let theId = 1;
 
   if (find.length > 0) {
     // console.log("noono");
     // id = theId;
-    console.log("yeyeye");
     theId = find.slice(-1)[0].id + 1;
   }
   const { name, category, new_price, old_price, image } = req.body;
@@ -99,8 +97,6 @@ app.post("/addproduct", async (req, res) => {
 
 app.delete("/deleteproduct/:theId", async (req, res) => {
   const id = req.params.theId;
-
-  console.log(id);
 
   const findProduct = await Product.findOne({ id: id });
 
@@ -221,7 +217,6 @@ app.post("/addtocard", fetchUser, async (req, res) => {
     user.cardDatd.push(req.body.product);
   }
 
-  console.log(user.cardDatd);
 
   await User.findByIdAndUpdate(
     { _id: req.user.id },

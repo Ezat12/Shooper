@@ -6,16 +6,36 @@ import { useNavigate } from "react-router-dom";
 export const LoginSignup = () => {
   const [Continue, setContinue] = useState("Sign Up");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [isEmpty, setIsEmpty] = useState({
+    name: false,
+    email: false,
+    password: false,
+  });
   const navigator = useNavigate();
 
   const login = async () => {
+    if (!email || !password) {
+      setIsEmpty({
+        email: !email,
+        password: !password,
+      });
+      toast("Please fill all fields", {
+        style: {
+          backgroundColor: "#dc3545",
+          color: "#fff",
+        },
+      });
+      return;
+    }
+
     const data = {
       email,
       password,
     };
-    await fetch("http://localhost:5000/login", {
+
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,9 +46,6 @@ export const LoginSignup = () => {
       .then((data) => {
         if (data.status === "success") {
           localStorage.setItem("token", data.data.token);
-
-          // navigator("/");
-
           toast("Success Login", {
             style: {
               background: "#28a745",
@@ -39,7 +56,6 @@ export const LoginSignup = () => {
             window.location.replace("/");
           }, 500);
         } else {
-          // alert(data.data);
           toast(data.data, {
             style: {
               background: "#dc3545",
@@ -49,13 +65,30 @@ export const LoginSignup = () => {
         }
       });
   };
+
   const signup = async () => {
+    if (!name || !email || !password) {
+      setIsEmpty({
+        name: !name,
+        email: !email,
+        password: !password,
+      });
+      toast("Please fill all fields", {
+        style: {
+          backgroundColor: "#dc3545",
+          color: "#fff",
+        },
+      });
+      return;
+    }
+
     const data = {
       email,
       password,
       userName: name,
     };
-    await fetch("http://localhost:5000/signup", {
+
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +99,6 @@ export const LoginSignup = () => {
       .then((data) => {
         if (data.status === "success") {
           localStorage.setItem("token", data.data.token);
-          // navigator("/");
           toast("Success Signup", {
             style: {
               backgroundColor: "#28a745",
@@ -77,7 +109,6 @@ export const LoginSignup = () => {
             window.location.replace("/");
           }, 500);
         } else {
-          // alert(data.data);
           toast(data.data, {
             style: {
               backgroundColor: "#dc3545",
@@ -85,32 +116,48 @@ export const LoginSignup = () => {
             },
           });
         }
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
+
   return (
     <div className="login-signup">
       <div className="page-container">
         <h2>{Continue}</h2>
-        <div className="login-signup-fields">
+        <div className={`login-signup-fields`}>
           {Continue === "Sign Up" ? (
             <input
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+                setIsEmpty((prev) => ({ ...prev, name: false }));
+              }}
               type="text"
               placeholder="Enter your name"
+              className={isEmpty.name ? "fail-input" : ""}
             />
           ) : null}
           <input
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setIsEmpty((prev) => ({ ...prev, email: false }));
+            }}
             type="email"
             placeholder="Enter your Email"
+            className={isEmpty.email ? "fail-input" : ""}
           />
           <input
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setIsEmpty((prev) => ({ ...prev, password: false }));
+            }}
             type="password"
             placeholder="Enter your Password"
+            className={isEmpty.password ? "fail-input" : ""}
           />
         </div>
         <button onClick={() => (Continue === "Sign Up" ? signup() : login())}>
@@ -129,7 +176,7 @@ export const LoginSignup = () => {
         )}
         <div className="loginsinup-agree">
           <input type="checkbox" />
-          <p>By Containuing ,i agree to the terms of use & privacy police.</p>
+          <p>By Continuing, I agree to the terms of use & privacy policy.</p>
         </div>
       </div>
     </div>
